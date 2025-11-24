@@ -14,28 +14,28 @@
 
          <!-- Login section-->
      <div class="form-box active" id="Login-form">
-        <form class="action">
+        <form action="login_register.php" method="POST">
             <h2>Login</h2>
-            <input type="email"  name="" id="" placeholder="Email" required>
-            <input type="password" name="" id="" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <input type="email"  name="email" id="" placeholder="Email" required>
+            <input type="password" name="password" id="" placeholder="Password" required>
+            <button type="submit" name="login">Login</button>
             <p>Don't have an account? <a href="#" onclick="showForm('Register-form')">Register</a></p>
         </form>
      </div>
 
          <!-- Register section-->
      <div class="form-box" id="Register-form" >
-        <form class="action">
+        <form action="login_register.php" method="POST">
             <h2>Register</h2>
-            <input type="text" name="" id="" placeholder="Full Name">
-            <input type="email"  name="" id="" placeholder="Email" required>
-            <select name="" id="">
+            <input type="text" name="fullname" id="" placeholder="Full Name">
+            <input type="email"  name="email" id="" placeholder="Email" required>
+            <select name="role" id="">
                 <option value="">-- select a role --</option> 
-                <option value="">User</option>
-                <option value="">Admin</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
             </select>
-            <input type="password" name="" id="" placeholder="Password" required>
-            <button type="submit">Register</button>
+            <input type="password" name="password" id="" placeholder="Password" required>
+            <button type="submit" name="register">Register</button>
             <p>Already have an accout? <a href="#" onclick="showForm('Login-form')">Login</a></p>
         </form>
      </div>
@@ -46,7 +46,6 @@
 
 
 
-
-    
+   
 </body>
 </html>
