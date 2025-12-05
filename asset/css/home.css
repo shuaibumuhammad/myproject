@@ -2,15 +2,17 @@
 
 
 *{
-    padding: 0;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: "karla", sans-serif;
+    font-family: "Karla", sans-serif;
 }
+
 
 body {
     color: #333;
 }
+
 
 header {
     position: fixed;
@@ -19,28 +21,39 @@ header {
     width: 100%;
     padding: 25px 9%;
     background: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 90;
+    z-index: 99;
 }
+
 
 .logo {
     font-size: 25px;
     color: #333;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 600;    
 }
 
-#cart-icon {
+/* new styling for the logout button */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
+
+#cart-icon, #user-menu-icon {
     position: relative;
     display: flex;
     font-size: 30px;
     cursor: pointer;
 }
+#cart-icon a {
+    color: red;
+}
 
-.cart-item-count {
+#cart-icon .cart-item-count {
     position: absolute;
     top: 0;
     right: -6px;
@@ -49,22 +62,65 @@ header {
     background: #e35f26;
     border-radius: 50%;
     font-size: 12px;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    visibility: hidden; /* hides element without removing it from */
+    visibility: hidden;   /* hides element without removing it from the document flow */
+}
 
+
+/* logout   */
+.user-dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position right below the icon */
+    right: 0;
+    min-width: 120px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 5px 0;
+    
+    /* Initially hide the dropdown */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Class to show the dropdown (added by JavaScript) */
+.user-dropdown-menu.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.logout-link {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    white-space: nowrap; /* Prevents text wrap */
+}
+
+.logout-link:hover {
+    background: #f5f5f5;
+}
+
+.logout-link i {
+    margin-right: 8px;
+    vertical-align: middle;
 }
 
 .shop {
-    padding: 130px 9% 30px;
+    padding: 100px 9% 30px;
 }
-
 .section-title {
     font-size: 35px;
     text-align: center;
     margin-bottom: 15px;
-
 }
 
 .product-content {
@@ -81,7 +137,7 @@ header {
 
 .img-box img {
     width: 100%;
-    transition: 0.5;
+    transition: 0.5s;
 }
 
 .img-box:hover img {
@@ -102,7 +158,6 @@ header {
 .price-and-cart .price {
     font-size: 18px;
     font-weight: 500;
-    
 }
 
 .price-and-cart .add-cart {
@@ -112,14 +167,13 @@ header {
     font-size: 20px;
     color: #fff;
     cursor: pointer;
-    
 }
 
 
 .cart {
     position: fixed;
     top: 0;
-    right: 0;
+    right: -100%;   /* default value: 0, later change to -100%* after styling the close btn */
     width: 360px;
     height: 100%;
     background: #fff;
@@ -130,7 +184,11 @@ header {
     transition: 0.5s;
 }
 
-/* shades of green color code */
+
+/* this is added after javascript */
+.cart.active {
+    right: 0;
+}
 
 .cart-title {
     text-align: center;
@@ -150,7 +208,6 @@ header {
     object-fit: cover;
     margin-right: 20px;
 }
-
 .cart-detail {
     display: grid;
     gap: 8px;
@@ -162,10 +219,9 @@ header {
     line-height: 1;
 }
 
-.cart-quantity {
+.cart-price {
     font-weight: 500;
 }
-
 .cart-quantity {
     display: flex;
     width: 100px;
@@ -184,7 +240,6 @@ header {
 .cart-quantity #decrement {
     color: #999;
 }
-
 .cart-quantity .number {
     display: flex;
     justify-content: center;
@@ -205,7 +260,7 @@ header {
     justify-content: flex-end;
     align-items: center;
     border-top: 1px solid #333;
-    margin: 20px;
+    margin-top: 20px;
     font-size: 18px;
 }
 
@@ -222,9 +277,10 @@ header {
     border-radius: 6px;
     font-size: 16px;
     color: #fff;
-    margin: 20px auto;
+    margin: 20px auto 0;
     cursor: pointer;
 }
+
 
 #cart-close {
     position: absolute;
@@ -232,4 +288,22 @@ header {
     right: 15px;
     font-size: 35px;
     cursor: pointer;
+}
+
+
+
+
+
+
+@media screen and (max-width: 360px) {
+    .product-content {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .cart {
+        width: 100%;
+    }
+    .user-dropdown-menu {
+        right: 0; 
+    }
 }
