@@ -1,9 +1,35 @@
+
+<?php
+session_start();
+
+$error = [
+    'login' => $_SESSION['login_error'] ?? '',
+    'register' => $_SESSION['register_error'] ?? '',
+
+];
+
+$activeForm = $_SESSION['active_form'] ?? 'login';
+
+session_unset();
+
+function showError($error) {
+    return !empty($error) ? "<p class='error-message'>$error</p>" : '';
+
+};
+
+function isActiveForm($formName, $activeForm) {
+    return $formName === $activeForm ? 'active' : '';
+};
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>m</title>
+    <title>mm_store</title>
     <link rel="stylesheet" href="asset/css/style.css">
 </head>
 <body>
@@ -16,6 +42,9 @@
      <div class="form-box active" id="Login-form">
         <form action="login_register.php" method="POST">
             <h2>Login</h2>
+
+            <?php showError($error['login']) ?>
+            
             <input type="email"  name="email" id="" placeholder="Email" required>
             <input type="password" name="password" id="" placeholder="Password" required>
             <button type="submit" name="login">Login</button>
@@ -27,6 +56,9 @@
      <div class="form-box" id="Register-form" >
         <form action="login_register.php" method="POST">
             <h2>Register</h2>
+
+            <?php showError($error['register']) ?>
+
             <input type="text" name="fullname" id="" placeholder="Full Name">
             <input type="email"  name="email" id="" placeholder="Email" required>
             <select name="role" id="">
